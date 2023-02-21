@@ -65,14 +65,14 @@ http {
 
       <% {
         'HTTP_REFERRER_POLICY' => 'strict-origin-when-cross-origin',
-        'HTTP_PERMISSIONS_POLICY' => "accelerometer 'none', ambient-light-sensor 'none', autoplay 'none', camera 'none', fullscreen 'self', geolocation 'none', gyroscope 'none', magnetometer 'none', microphone 'none', midi 'none', payment 'none', speaker 'none', sync-xhr 'self', usb 'none', vr 'none'",
+        'HTTP_PERMISSIONS_POLICY' => "accelerometer=(), ambient-light-sensor=(), autoplay=(), camera=(), fullscreen=(self), geolocation=(), gyroscope=(), magnetometer=(), microphone=(), midi=(), payment=(), speaker=(), sync-xhr=(self), usb=(), vr=()",
         'HTTP_X_CONTENT_TYPE_OPTIONS' => 'nosniff',
         'HTTP_X_PERMITTED_CROSS_DOMAIN_POLICIES' => 'none',
         'HTTP_X_DOWNLOAD_OPTIONS' => 'noopen',
         'HTTP_X_FRAME_OPTIONS' => 'SAMEORIGIN',
         'HTTP_X_XSS_PROTECTION' => '1; mode=block',
         'HTTP_STRICT_TRANSPORT_SECURITY' => 'max-age=63072000; includeSubDomains; preload',
-        'HTTP_CONTENT_SECURITY_POLICY' => "default-src 'self'"
+        'HTTP_CONTENT_SECURITY_POLICY' => "default-src 'self'; style-src 'unsafe-inline' 'self'; font-src 'self' 'data:'"
       }.merge(ENV.select { |name, _| name.start_with?('HTTP_') }).each do |header, value| %>
       add_header <%= header[5..-1].capitalize.gsub(/_./) { |letter| '-' + letter[1].upcase  } %> "<%= value.gsub('"', '\"') %>";
       <% end %>
